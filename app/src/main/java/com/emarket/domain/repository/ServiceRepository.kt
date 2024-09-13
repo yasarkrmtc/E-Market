@@ -5,5 +5,4 @@ import com.emarket.data.remote.Product
 import kotlinx.coroutines.flow.Flow
 
 interface ServiceRepository {
-    suspend fun getProducts(): Flow<Response<List<Product>>>
 }

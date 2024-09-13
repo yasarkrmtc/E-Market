@@ -6,15 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.ProductListingFragment">
 
-    <Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size24"
-        android:title="@string/app_name"
-        android:titleTextColor="@color/white"
-        android:background="@color/blueAppColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ProgressBar
         android:id="@+id/home_progressBar"
@@ -25,5 +17,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
