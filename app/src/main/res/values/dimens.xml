@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header1Size">24sp</dimen>
+    <dimen name="header2Size">20sp</dimen>
+    <dimen name="header3Size">18sp</dimen>
+    <dimen name="header4Size">16sp</dimen>
+    <dimen name="body1Size">18sp</dimen>
+    <dimen name="body2Size">16sp</dimen>
+    <dimen name="body3Size">14sp</dimen>
+
+    <dimen name="size0">0dp</dimen>
+    <dimen name="size1">2dp</dimen>
+    <dimen name="size2">4dp</dimen>
+    <dimen name="size3">6dp</dimen>
+    <dimen name="size4">8dp</dimen>
+    <dimen name="size5">10dp</dimen>
+    <dimen name="size6">12dp</dimen>
+    <dimen name="size7">14dp</dimen>
+    <dimen name="size8">16dp</dimen>
+    <dimen name="size9">18dp</dimen>
+    <dimen name="size10">20dp</dimen>
+    <dimen name="size11">22dp</dimen>
+    <dimen name="size12">24dp</dimen>
+    <dimen name="size13">26dp</dimen>
+    <dimen name="size14">28dp</dimen>
+    <dimen name="size15">30dp</dimen>
+    <dimen name="size16">32dp</dimen>
+    <dimen name="size24">48dp</dimen>
+
+    <dimen name="padding1">2dp</dimen>
+    <dimen name="padding2">4dp</dimen>
+    <dimen name="padding3">6dp</dimen>
+    <dimen name="padding4">8dp</dimen>
+    <dimen name="padding5">10dp</dimen>
+    <dimen name="padding6">12dp</dimen>
+    <dimen name="padding7">14dp</dimen>
+    <dimen name="padding8">16dp</dimen>
+    <dimen name="padding9">18dp</dimen>
+    <dimen name="padding10">20dp</dimen>
+    <dimen name="padding11">22dp</dimen>
+    <dimen name="padding12">24dp</dimen>
+    <dimen name="padding13">26dp</dimen>
+    <dimen name="padding14">28dp</dimen>
+    <dimen name="padding15">30dp</dimen>
+    <dimen name="padding16">32dp</dimen>
+
+    <dimen name="cardCornerRadius1">1dp</dimen>
+    <dimen name="cardCornerRadius2">2dp</dimen>
+    <dimen name="cardCornerRadius3">3dp</dimen>
+    <dimen name="cardCornerRadius4">4dp</dimen>
+    <dimen name="cardCornerRadius5">5dp</dimen>
+    <dimen name="cardCornerRadius6">6dp</dimen>
+    <dimen name="cardCornerRadius7">7dp</dimen>
+    <dimen name="cardCornerRadius8">8dp</dimen>
+    <dimen name="cardCornerRadius9">9dp</dimen>
+    <dimen name="cardCornerRadius10">10dp</dimen>
+    <dimen name="cardCornerRadius14">14dp</dimen>
+    <dimen name="cardCornerRadius16">16dp</dimen>
+    <dimen name="cardCornerRadius22">22dp</dimen>
+
+    <dimen name="tableCardHeight">100dp</dimen>
+    <dimen name="sectionItemHeight">50dp</dimen>
+    <dimen name="sectionItemWidth">86dp</dimen>
+
+    <dimen name="imageCardSizeLogo">56dp</dimen>
+    <dimen name="imageCardSizeFood">72dp</dimen>
+    <dimen name="imageCardSizeFood2">88dp</dimen>
+    <dimen name="elevation0">0dp</dimen>
+    <dimen name="elevation1">1dp</dimen>
+    <dimen name="elevation2">2dp</dimen>
+    <dimen name="elevation3">3dp</dimen>
+    <dimen name="elevation4">4dp</dimen>
+
+    <dimen name="dividerHeightSize">1dp</dimen>
+    <dimen name="strokeWidth">1dp</dimen>
+    <dimen name="backgroundRadius">10dp</dimen>
+    <dimen name="mainButtonPadding">16dp</dimen>
+    <dimen name="circularImageSize">25dp</dimen>
+
+
+    <item name="adaptiveItemSpacingHorizontal" type="integer">16</item>
+    <item name="adaptiveItemSpacingVertical" type="integer">48</item>
+    <item name="shimmerDuration" type="integer">1500</item>
+    <item name="hiddenNumber" type="integer">7</item>
+
+
+</resources>

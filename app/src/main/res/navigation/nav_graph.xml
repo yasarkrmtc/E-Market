@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productListingFragment">
 
-</resources>
+    <fragment
+        android:id="@+id/productListingFragment"
+        android:name="com.emarket.ui.home.ProductListingFragment"
+        android:label="Product Listing"
+        tools:layout="@layout/fragment_product_listing" >
+        <action
+            android:id="@+id/action_productListingFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.emarket.ui.detail.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" >
+        <action
+            android:id="@+id/action_productDetailFragment_to_productBasketFragment"
+            app:destination="@id/productBasketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productBasketFragment"
+        android:name="com.emarket.ui.chart.ProductBasketFragment"
+        android:label="fragment_product_basket"
+        tools:layout="@layout/fragment_product_basket" />
+</navigation>
