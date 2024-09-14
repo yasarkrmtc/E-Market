@@ -13,6 +13,15 @@
         <action
             android:id="@+id/action_productListingFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_productListingFragment_to_filtersFragment"
+            app:destination="@id/filtersFragment" />
+        <action
+            android:id="@+id/action_productListingFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_productListingFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
@@ -28,4 +37,17 @@
         android:name="com.emarket.ui.chart.ProductBasketFragment"
         android:label="fragment_product_basket"
         tools:layout="@layout/fragment_product_basket" />
+    <fragment
+        android:id="@+id/filtersFragment"
+        android:name="com.emarket.ui.filters.FiltersFragment"
+        android:label="FiltersFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.emarket.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.emarket.ui.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" />
 </navigation>

@@ -18,4 +18,8 @@
     <string name="price">Price</string>
     <string name="select_filter">Select Filter</string>
     <string name="filters">Filters:</string>
+    <string name="home">Home</string>
+    <string name="basket">Basket</string>
+    <string name="favorite">Favorite</string>
+    <string name="profile">Profile</string>
 </resources>
