@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductViewModel @Inject constructor(
+class ProductListingViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val serviceInterface: ServiceInterface,
     private val insertDataBaseUseCase: InsertDataBaseUseCase

@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 class ProductListingFragment :
     BaseFragment<FragmentProductListingBinding>(FragmentProductListingBinding::inflate) {
 
-    private val viewModel : ProductViewModel by viewModels()
+    private val viewModel : ProductListingViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
