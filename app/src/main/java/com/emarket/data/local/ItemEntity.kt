@@ -13,5 +13,6 @@ data class ItemEntity(
     val price: String,
     val description: String,
     val model: String,
-    val brand: String
+    val brand: String,
+    var totalOrder:Int
 )

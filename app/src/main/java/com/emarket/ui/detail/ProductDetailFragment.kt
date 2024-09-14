@@ -11,7 +11,6 @@ class ProductDetailFragment :
     BaseFragment<FragmentProductDetailBinding>(FragmentProductDetailBinding::inflate) {
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {

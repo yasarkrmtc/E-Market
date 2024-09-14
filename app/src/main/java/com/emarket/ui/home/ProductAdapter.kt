@@ -1,18 +1,28 @@
 package com.emarket.ui.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.emarket.data.remote.Product
 import com.emarket.databinding.ItemProductBinding
+import com.emarket.databinding.ProductListiningItemBinding
+import com.emarket.utils.clickWithDebounce
 
 class ProductAdapter :
     PagingDataAdapter<Product, ProductAdapter.ProductViewHolder>(PRODUCT_COMPARATOR) {
 
+    private var itemClick: (item: Product) -> Unit = { item -> }
+
+    fun itemClick(item: (Product) -> Unit) {
+        itemClick = item
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val binding = ItemProductBinding.inflate(
+        val binding = ProductListiningItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return ProductViewHolder(binding)
@@ -25,11 +35,19 @@ class ProductAdapter :
         }
     }
 
-    inner class ProductViewHolder(private val binding: ItemProductBinding) :
+    inner class ProductViewHolder(private val binding: ProductListiningItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
-            binding.productDescription.text = product.name
+            binding.productName.text = product.name
+            binding.productPrice.text=product.price
+            Glide.with(binding.root.context)
+                .load(product.image)
+                .into(binding.productImage)
+            binding.addToCartButton.clickWithDebounce {
+                product.totalOrder += 1
+                itemClick.invoke(product)
+            }
         }
     }
 

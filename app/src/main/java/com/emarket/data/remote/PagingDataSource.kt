@@ -3,7 +3,6 @@ package com.emarket.data.remote
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import retrofit2.HttpException
 import java.io.IOException
 
 class PagingDataSource(
@@ -18,10 +17,10 @@ class PagingDataSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
+
         val pageIndex = params.key ?: 1
         return try {
-            // Artık suspend fonksiyon kullanıldığı için ağ işlemi arka planda yapılacak
-            val productList = serviceInterface.fetchProducts()
+            val productList = serviceInterface.fetchProducts(pageIndex)
 
             Log.d("ProductResponse", productList.toString())
 
@@ -40,9 +39,6 @@ class PagingDataSource(
             )
         } catch (e: IOException) {
             Log.e("Error", "IOException: $e")
-            LoadResult.Error(e)
-        } catch (e: HttpException) {
-            Log.e("Error", "HttpException: $e")
             LoadResult.Error(e)
         }
     }

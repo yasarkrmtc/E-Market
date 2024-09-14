@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="@dimen/size2"
+    android:padding="@dimen/size5">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/product_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="@dimen/size5"
+        android:layout_marginTop="@dimen/size5"
+        android:layout_marginEnd="@dimen/size5"
+        android:background="#C4C4C4"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintDimensionRatio="1" />
+
+    <ImageView
+        android:id="@+id/favorite_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="@dimen/size3"
+        android:layout_marginEnd="@dimen/size3"
+        android:src="@drawable/star_select"
+        app:layout_constraintTop_toTopOf="@id/product_image"
+        app:layout_constraintEnd_toEndOf="@id/product_image" />
+
+    <TextView
+        android:id="@+id/product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size7"
+        android:fontFamily="@font/montserrat"
+        android:text="15.000 ₺"
+        android:textColor="@color/blueAppColor"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/product_image"
+        app:layout_constraintTop_toBottomOf="@id/product_image" />
+
+    <!-- Product Name -->
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size7"
+        android:fontFamily="@font/montserrat"
+        android:text="iPhone 13 Pro Max 256Gb"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/product_image"
+        app:layout_constraintStart_toStartOf="@+id/product_price"
+        app:layout_constraintTop_toBottomOf="@+id/product_price" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size7"
+        android:layout_marginEnd="@dimen/size5"
+        android:layout_marginBottom="@dimen/size5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_name">
+
+
+        <Button
+            android:id="@+id/add_to_cart_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="@string/add_to_cart"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/header4Size"
+            app:cornerRadius="@dimen/size2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/constraint"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

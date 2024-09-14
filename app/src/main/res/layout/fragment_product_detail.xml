@@ -6,6 +6,117 @@
     android:layout_height="match_parent"
     tools:context=".ui.detail.ProductDetailFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/product_detail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/blueAppColor"
+            android:elevation="4dp"
+            app:title="E-Market"
+            app:titleTextColor="@android:color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/product_detail_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_detail_toolbar"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/product_detail_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+    android:textSize="24sp"
+    app:layout_constraintEnd_toEndOf="@+id/product_detail_image"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="@+id/product_detail_image"
+    app:layout_constraintTop_toBottomOf="@+id/product_detail_image" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/product_detail_price_title"
+        app:layout_constraintEnd_toEndOf="@+id/product_detail_name"
+        app:layout_constraintStart_toStartOf="@+id/product_detail_name"
+        app:layout_constraintTop_toBottomOf="@+id/product_detail_name">
+
+        <TextView
+            android:id="@+id/product_detail_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-medium"
+            android:justificationMode="inter_word"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/product_detail_name"
+            app:layout_constraintStart_toStartOf="@+id/product_detail_name"
+            app:layout_constraintTop_toBottomOf="@+id/product_detail_name" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/product_detail_price_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="sans-serif"
+        android:text="Price"
+        android:textColor="#0000FF"
+    android:textSize="18sp"
+    app:layout_constraintBottom_toTopOf="@+id/product_detail_price_text"
+    app:layout_constraintStart_toStartOf="@+id/product_detail_price_text" />
+
+    <TextView
+        android:id="@+id/product_detail_price_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-bold"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/product_detail_button"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_background"
+        android:minHeight="0dp"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-bold"
+        android:text="Add to Cart"
+        app:layout_constraintBottom_toBottomOf="@+id/product_detail_price_text"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/product_detail_favourite_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/favourite_icon_selector"
+        app:layout_constraintEnd_toEndOf="@+id/product_detail_image"
+        app:layout_constraintTop_toTopOf="@+id/product_detail_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

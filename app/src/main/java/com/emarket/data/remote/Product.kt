@@ -10,5 +10,6 @@ data class Product(
     @SerializedName("price") val price: String,
     @SerializedName("description") val description: String,
     @SerializedName("model") val model: String,
-    @SerializedName("brand") val brand: String
+    @SerializedName("brand") val brand: String,
+    var totalOrder :Int =0,
 )
