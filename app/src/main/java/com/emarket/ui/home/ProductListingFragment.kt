@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.map
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.emarket.base.BaseFragment
 import com.emarket.databinding.FragmentProductListingBinding
@@ -22,7 +22,7 @@ class ProductListingFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val productAdapter = ProductAdapter()
+        val productAdapter = ProductListingAdapter()
 
         binding.rv.layoutManager = GridLayoutManager(context, 2)
         binding.rv.adapter = productAdapter
@@ -34,7 +34,12 @@ class ProductListingFragment :
         }
         productAdapter.itemClick { product ->
             viewModel.updateDataBase(product)
+            // Navigate to ProductDetailFragment
+            val action = ProductListingFragmentDirections
+                .actionProductListingFragmentToProductDetailFragment(product)
+            findNavController().navigate(action)
         }
+
         productAdapter.favoriteClick {
             Log.e("qqqqq","1111111")
             viewModel.updateFavorite(it)

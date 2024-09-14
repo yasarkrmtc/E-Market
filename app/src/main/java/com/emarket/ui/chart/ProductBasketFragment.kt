@@ -2,6 +2,7 @@ package com.emarket.ui.chart
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -18,8 +19,7 @@ class ProductBasketFragment :
     BaseFragment<FragmentProductBasketBinding>(FragmentProductBasketBinding::inflate) {
 
     private val basketAdapter = ProductBasketAdapter()
-    private val basketItems = mutableListOf<Product>()
-    private val viewModel : ProductBasketViewModel by viewModels()
+    private val viewModel: ProductBasketViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,7 +30,8 @@ class ProductBasketFragment :
         viewModel.getTotalPrice()
         initListeners()
     }
-    private fun initListeners(){
+
+    private fun initListeners() {
         basketAdapter.onItemClick {
             viewModel.updateDataBase(
                 Product(
@@ -43,10 +44,18 @@ class ProductBasketFragment :
                     model = it.model,
                     brand = it.brand,
                     totalOrder = it.totalOrder
-
-
                 )
             )
+        }
+
+        // Handle complete button click
+        binding.completeButton.setOnClickListener {
+            if (basketAdapter.currentList.isNotEmpty()) {
+                viewModel.clearDatabase()
+                Toast.makeText(requireContext(), "Completed", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "No items to complete", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -54,6 +63,7 @@ class ProductBasketFragment :
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = basketAdapter
     }
+
     private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.items.collect { items ->
@@ -67,7 +77,7 @@ class ProductBasketFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.localPrice.collect { price ->
-                    binding.productDetailPriceText.text = price
+                    binding.priceText.text = price
                 }
             }
         }

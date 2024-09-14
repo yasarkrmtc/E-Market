@@ -28,6 +28,9 @@
         android:name="com.emarket.ui.detail.ProductDetailFragment"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" >
+        <argument
+            android:name="product"
+            app:argType="com.emarket.data.remote.Product" />
         <action
             android:id="@+id/action_productDetailFragment_to_productBasketFragment"
             app:destination="@id/productBasketFragment" />

@@ -10,8 +10,8 @@ import com.emarket.data.remote.Product
 import com.emarket.databinding.ProductListiningItemBinding
 import com.emarket.utils.clickWithDebounce
 
-class ProductAdapter :
-    PagingDataAdapter<Product, ProductAdapter.ProductViewHolder>(PRODUCT_COMPARATOR) {
+class ProductListingAdapter :
+    PagingDataAdapter<Product, ProductListingAdapter.ProductViewHolder>(PRODUCT_COMPARATOR) {
 
     private var itemClick: (item: Product) -> Unit = { item -> }
 
@@ -61,6 +61,10 @@ class ProductAdapter :
 
             binding.addToCartButton.clickWithDebounce {
                 product.totalOrder += 1
+                itemClick.invoke(product)
+            }
+
+            binding.productImage.clickWithDebounce {
                 itemClick.invoke(product)
             }
         }
