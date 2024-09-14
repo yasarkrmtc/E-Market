@@ -35,6 +35,11 @@ class ProductListingFragment :
         productAdapter.itemClick { product ->
             viewModel.updateDataBase(product)
         }
+        productAdapter.favoriteClick {
+            Log.e("qqqqq","1111111")
+            viewModel.updateFavorite(it)
+
+        }
 
 
         viewLifecycleOwner.lifecycleScope.launch {

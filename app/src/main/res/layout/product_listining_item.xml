@@ -34,7 +34,7 @@
         android:layout_height="24dp"
         android:layout_marginTop="@dimen/size3"
         android:layout_marginEnd="@dimen/size3"
-        android:src="@drawable/star_select"
+        android:background="@drawable/favourite_icon_selector"
         app:layout_constraintTop_toTopOf="@id/product_image"
         app:layout_constraintEnd_toEndOf="@id/product_image" />
 

@@ -3,8 +3,8 @@ package com.emarket.data.local
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "items")
-data class ItemEntity(
+@Entity(tableName = "favorites")
+data class FavoriteItemEntity(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     val createdAt: String,
@@ -14,6 +14,5 @@ data class ItemEntity(
     val description: String,
     val model: String,
     val brand: String,
-    var totalOrder:Int,
     var isFavorite :Boolean = false
 )

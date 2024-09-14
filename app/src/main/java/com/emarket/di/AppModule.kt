@@ -3,6 +3,8 @@ package com.emarket.di
 import android.content.Context
 import androidx.room.Room
 import com.emarket.data.local.CartDataBase
+import com.emarket.data.local.FavoriteDAO
+import com.emarket.data.local.FavoriteDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,4 +28,18 @@ object AppModule {
     @Singleton
     @Provides
     fun provideProductsDao(database : CartDataBase) = database.productsDao()
+
+    @Singleton
+    @Provides
+    fun provideFavoriteDatabase(
+        @ApplicationContext app : Context
+    ) = Room.databaseBuilder(
+        app,
+        FavoriteDataBase::class.java,
+        "FavoriteDataBase"
+    ).build()
+
+    @Singleton
+    @Provides
+    fun provideFavoriteProductsDao(database : FavoriteDataBase) = database.productsDao()
 }

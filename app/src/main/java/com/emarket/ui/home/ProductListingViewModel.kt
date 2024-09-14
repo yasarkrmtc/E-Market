@@ -7,10 +7,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.map
 import com.emarket.data.remote.PagingDataSource
 import com.emarket.data.remote.Product
 import com.emarket.data.remote.ServiceInterface
+import com.emarket.data.repository.ServiceRepositoryImpl
 import com.emarket.domain.usecase.InsertDataBaseUseCase
+import com.emarket.domain.usecase.UpdateFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -28,12 +31,16 @@ import javax.inject.Inject
 class ProductListingViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val serviceInterface: ServiceInterface,
-    private val insertDataBaseUseCase: InsertDataBaseUseCase
+    private val insertDataBaseUseCase: InsertDataBaseUseCase,
+    private val updateFavoriteUseCase: UpdateFavoriteUseCase,
+    private val repository: ServiceRepositoryImpl
+
 ) : ViewModel() {
     init {
         savedStateHandle["PAGING_ID"] = 0
     }
     private val clearListCh = Channel<Unit>(Channel.CONFLATED)
+
     fun getProducts(): Flow<PagingData<Product>> {
         @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
         return flowOf(
@@ -50,10 +57,24 @@ class ProductListingViewModel @Inject constructor(
                     }.flow
                 }
         ).flattenMerge(2)
+            .map { pagingData ->
+                pagingData.map { product ->
+                    val favoriteProduct = repository.getFavoriteProductById(product.id)
+                    if (favoriteProduct != null) {
+                        product.isFavorite = true
+                    }
+                    product
+                }}
     }
+
     fun updateDataBase(item: Product) {
         viewModelScope.launch {
             insertDataBaseUseCase(item)
+        }
+    }
+    fun updateFavorite(item: Product){
+        viewModelScope.launch {
+            updateFavoriteUseCase(item)
         }
     }
 }

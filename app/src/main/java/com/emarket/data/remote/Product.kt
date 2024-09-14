@@ -12,4 +12,5 @@ data class Product(
     @SerializedName("model") val model: String,
     @SerializedName("brand") val brand: String,
     var totalOrder :Int =0,
+    var isFavorite :Boolean = false
 )

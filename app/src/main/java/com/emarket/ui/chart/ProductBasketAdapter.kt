@@ -1,55 +1,69 @@
 package com.emarket.ui.chart
 
+import com.emarket.data.local.ItemEntity
+
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.emarket.data.remote.Product
 import com.emarket.databinding.ProductBasketItemBinding
+import com.emarket.utils.clickWithDebounce
 
-class ProductBasketAdapter(
-    private val items: List<Product>,
-    private val onItemClick: (Product) -> Unit,
-    private val onQuantityChanged: (Product, Int) -> Unit
-) : RecyclerView.Adapter<ProductBasketAdapter.BasketViewHolder>() {
+class ProductBasketAdapter :
+    ListAdapter<ItemEntity, ProductBasketAdapter.BasketViewHolder>(ChartDiffCallback()) {
 
-    inner class BasketViewHolder(private val binding: ProductBasketItemBinding) :
+    private var onItemClick: (item: ItemEntity) -> Unit =
+        { item -> }
+
+    fun onItemClick(item: (ItemEntity) -> Unit) {
+        onItemClick = item
+    }
+
+    inner class BasketViewHolder(private val binding:ProductBasketItemBinding ) :
         RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(product: Product) {
+        fun bind(product: ItemEntity) {
             binding.tvProductName.text = product.name
             binding.tvPrice.text = product.price
             binding.tvCounter.text = product.totalOrder.toString()
 
-            binding.btnMinus.setOnClickListener {
-                if (product.totalOrder > 1) {
-                    product.totalOrder -= 1
-                    binding.tvCounter.text = product.totalOrder.toString()
-                    onQuantityChanged(product, product.totalOrder)
-                }
-            }
 
-            binding.btnPlus.setOnClickListener {
+            binding.btnPlus.clickWithDebounce {
                 product.totalOrder += 1
                 binding.tvCounter.text = product.totalOrder.toString()
-                onQuantityChanged(product, product.totalOrder)
+                onItemClick.invoke(product)
+            }
+            binding.btnMinus.clickWithDebounce {
+                product.totalOrder -= 1
+                binding.tvCounter.text = product.totalOrder.toString()
+                onItemClick.invoke(product)
             }
 
-            binding.root.setOnClickListener {
-                onItemClick(product)
-            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketViewHolder {
         val binding = ProductBasketItemBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
         return BasketViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: BasketViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int = items.size
+    class ChartDiffCallback : DiffUtil.ItemCallback<ItemEntity>() {
+        override fun areItemsTheSame(oldItem: ItemEntity, newItem: ItemEntity): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: ItemEntity, newItem: ItemEntity): Boolean {
+            return oldItem == newItem
+        }
+    }
+
 }

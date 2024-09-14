@@ -31,11 +31,50 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/size5"
-        android:layout_marginBottom="@dimen/size24"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/size8"
+        app:layout_constraintBottom_toTopOf="@+id/product_detail_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <TextView
+        android:id="@+id/detail_price_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/price"
+        android:textColor="#0000FF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/product_detail_price_text"
+        app:layout_constraintStart_toStartOf="@+id/product_detail_price_text" />
+
+    <TextView
+        android:id="@+id/product_detail_price_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/_12_000"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/product_detail_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:fontFamily="@font/montserrat"
+        android:minHeight="0dp"
+        android:text="Add to Cart"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

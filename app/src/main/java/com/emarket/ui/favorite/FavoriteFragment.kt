@@ -1,24 +1,33 @@
 package com.emarket.ui.favorite
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.emarket.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.emarket.base.BaseFragment
 import com.emarket.databinding.FragmentFavoriteBinding
-import com.emarket.databinding.FragmentProductBasketBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FavoriteFragment :
-    BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteBinding::inflate) {
+class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteBinding::inflate) {
+
+    private val viewModel: FavoriteViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
 
+        binding.favoriteRecyclerView.layoutManager = LinearLayoutManager(context)
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getFavoriteProducts().collectLatest { favoriteList ->
+                val adapter = FavoriteAdapter(favoriteList) { product ->
+                    viewModel.deleteFavorite(product)
+                }
+                binding.favoriteRecyclerView.adapter = adapter
+            }
         }
-    }}
+    }
+}

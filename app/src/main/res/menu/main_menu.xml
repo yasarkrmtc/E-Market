@@ -8,7 +8,7 @@
         android:icon="@drawable/icon_home"
         android:title="@string/home" />
     <item
-        android:id="@+id/basketFragment"
+        android:id="@+id/productBasketFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/icon_basket"
@@ -20,7 +20,7 @@
         android:icon="@drawable/icon_favorite"
         android:title="@string/favorite" />
     <item
-        android:id="@+id/productBasketFragment"
+        android:id="@+id/profileFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/icon_person"
