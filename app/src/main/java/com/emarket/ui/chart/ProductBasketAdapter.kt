@@ -1,7 +1,6 @@
 package com.emarket.ui.chart
 
 import com.emarket.data.local.ItemEntity
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -13,31 +12,29 @@ import com.emarket.utils.clickWithDebounce
 class ProductBasketAdapter :
     ListAdapter<ItemEntity, ProductBasketAdapter.BasketViewHolder>(ChartDiffCallback()) {
 
-    private var onItemClick: (item: ItemEntity) -> Unit =
-        { item -> }
+    private var onItemClick: (ItemEntity) -> Unit = {}
 
-    fun onItemClick(item: (ItemEntity) -> Unit) {
-        onItemClick = item
+    fun setOnItemClickListener(listener: (ItemEntity) -> Unit) {
+        onItemClick = listener
     }
 
-    inner class BasketViewHolder(private val binding:ProductBasketItemBinding ) :
+    inner class BasketViewHolder(private val binding: ProductBasketItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: ItemEntity) {
-            binding.tvProductName.text = product.name
-            binding.tvPrice.text = product.price
+            with(binding) {
+                tvProductName.text = product.name
+                tvPrice.text = product.price
+                tvCounter.text = product.totalOrder.toString()
+
+                btnPlus.clickWithDebounce { updateProductCount(product, 1) }
+                btnMinus.clickWithDebounce { updateProductCount(product, -1) }
+            }
+        }
+
+        private fun updateProductCount(product: ItemEntity, increment: Int) {
+            product.totalOrder += increment
             binding.tvCounter.text = product.totalOrder.toString()
-
-
-            binding.btnPlus.clickWithDebounce {
-                product.totalOrder += 1
-                binding.tvCounter.text = product.totalOrder.toString()
-                onItemClick.invoke(product)
-            }
-            binding.btnMinus.clickWithDebounce {
-                product.totalOrder -= 1
-                binding.tvCounter.text = product.totalOrder.toString()
-                onItemClick.invoke(product)
-            }
+            onItemClick.invoke(product)
         }
     }
 
