@@ -29,22 +29,22 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
 
     private fun setupRecyclerView() {
         favoriteAdapter = FavoriteAdapter(
-<<<<<<< HEAD
             favoriteList = listOf(), // Initially empty list
-=======
             favoriteList = listOf(),
->>>>>>> parent of fb93259 (general clean)
+
+            favoriteList = listOf(),
             onDeleteClick = { product ->
                 viewModel.deleteFavorite(product)
             }
         )
 
-<<<<<<< HEAD
+
         binding.favoriteRecyclerView.layoutManager = GridLayoutManager(requireContext(), 1) // Set columns for grid
-=======
         binding.favoriteRecyclerView.layoutManager =
             GridLayoutManager(requireContext(), 1)
->>>>>>> parent of fb93259 (general clean)
+
+        binding.favoriteRecyclerView.layoutManager =
+            GridLayoutManager(requireContext(), 1)
         binding.favoriteRecyclerView.adapter = favoriteAdapter
 
         val spacing = resources.getDimensionPixelSize(R.dimen.size1)

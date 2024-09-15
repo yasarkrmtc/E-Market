@@ -33,11 +33,12 @@ class ProductDetailViewModel @Inject constructor(
         viewModelScope.launch {
             insertDataBaseUseCase(item)
         }
-<<<<<<< HEAD
-        getDataBaseItemCount()
-=======
 
->>>>>>> parent of fb93259 (general clean)
+        getDataBaseItemCount()
+
+
+    }
+
     }
     fun getDataBaseItemCount(){
         viewModelScope.launch {

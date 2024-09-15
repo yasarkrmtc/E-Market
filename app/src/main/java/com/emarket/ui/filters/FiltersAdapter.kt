@@ -26,13 +26,13 @@ class FiltersAdapter(
 
         fun bind(item: String) {
             binding.checkbox.text = item
-<<<<<<< HEAD
+
             binding.checkbox.setOnCheckedChangeListener(null) // Prevent recycling issues
             binding.checkbox.isChecked = false // Default to unchecked, modify as needed
-=======
             binding.checkbox.setOnCheckedChangeListener(null)
             binding.checkbox.isChecked = false
->>>>>>> parent of fb93259 (general clean)
+            binding.checkbox.setOnCheckedChangeListener(null)
+            binding.checkbox.isChecked = false
 
             binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
                 onItemCheckedChanged(item, isChecked)

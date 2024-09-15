@@ -135,11 +135,6 @@ class ProductListingFragment :
         )
         binding.rv.addItemDecoration(itemDecoration)
     }
-<<<<<<< HEAD
 }
-
-
-
-=======
 }
->>>>>>> parent of fb93259 (general clean)
+}

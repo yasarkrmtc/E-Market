@@ -39,10 +39,6 @@ class ProductListingViewModel @Inject constructor(
     init {
         savedStateHandle["PAGING_ID"] = 1
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of fb93259 (general clean)
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: MutableStateFlow<String> = _searchQuery
@@ -79,7 +75,6 @@ class ProductListingViewModel @Inject constructor(
                 }
                 product
             }.filter { product ->
-                // Filter products based on search query
                 product.name.contains(query, ignoreCase = true)
             }
         }
@@ -92,11 +87,9 @@ class ProductListingViewModel @Inject constructor(
     fun updateDataBase(item: Product) {
         viewModelScope.launch {
             insertDataBaseUseCase(item)
-<<<<<<< HEAD
-=======
+
             getDataBaseItemCount()
 
->>>>>>> parent of fb93259 (general clean)
         }
         getDataBaseItemCount()
     }

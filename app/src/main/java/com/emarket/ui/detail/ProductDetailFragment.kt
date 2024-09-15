@@ -26,14 +26,12 @@ class ProductDetailFragment :
         val product = args.product
         viewModel.getDataBaseItemCount()
         binding.apply {
-<<<<<<< HEAD
-=======
+
             detailBackButton.clickWithDebounce {
                 findNavController().popBackStack()
             }
 
             detailTitle.text = product.name
->>>>>>> parent of fb93259 (general clean)
             detailName.text = product.name
             detailPriceText.text = product.price
             detailDescription.text = product.description
@@ -56,13 +54,14 @@ class ProductDetailFragment :
             }
 
             productDetailButton.setOnClickListener {
-<<<<<<< HEAD
+
                 val newProduct = product.copy(totalOrder = product.totalOrder+1)
                viewModel.updateDataBase(newProduct)
-=======
                 val newProduct = product.copy(totalOrder = product.totalOrder + 1)
                 viewModel.updateDataBase(newProduct)
->>>>>>> parent of fb93259 (general clean)
+
+                val newProduct = product.copy(totalOrder = product.totalOrder + 1)
+                viewModel.updateDataBase(newProduct)
             }
         }
     }
