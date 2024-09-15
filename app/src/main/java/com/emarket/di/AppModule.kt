@@ -3,7 +3,6 @@ package com.emarket.di
 import android.content.Context
 import androidx.room.Room
 import com.emarket.data.local.CartDataBase
-import com.emarket.data.local.FavoriteDAO
 import com.emarket.data.local.FavoriteDataBase
 import dagger.Module
 import dagger.Provides

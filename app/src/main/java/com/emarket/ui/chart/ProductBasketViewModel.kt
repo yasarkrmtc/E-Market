@@ -71,12 +71,12 @@ class ProductBasketViewModel @Inject constructor(
         }
         getDataBaseItemCount()
     }
-    fun getDataBaseItemCount(){
+
+    fun getDataBaseItemCount() {
         viewModelScope.launch {
-            getDataBaseItemCounter().collect{
+            getDataBaseItemCounter().collect {
                 _databaseCounter.value = it
             }
         }
     }
-
 }

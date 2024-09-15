@@ -59,6 +59,15 @@
     <dimen name="size40">80dp</dimen>
     <dimen name="size46">92dp</dimen>
     <dimen name="size50">100dp</dimen>
+    <dimen name="size55">110dp</dimen>
+    <dimen name="size60">120dp</dimen>
+
+
+
+    <dimen name="size70">140dp</dimen>
+    <dimen name="size75">150dp</dimen>
+
+
 
     <dimen name="size100">200dp</dimen>
 

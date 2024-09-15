@@ -2,7 +2,6 @@ package com.emarket.ui.chart
 
 import com.emarket.data.local.ItemEntity
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -21,7 +20,7 @@ class ProductBasketAdapter :
         onItemClick = item
     }
 
-    inner class BasketViewHolder(private val binding:ProductBasketItemBinding ) :
+    inner class BasketViewHolder(private val binding: ProductBasketItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: ItemEntity) {
             binding.tvProductName.text = product.name
@@ -39,7 +38,6 @@ class ProductBasketAdapter :
                 binding.tvCounter.text = product.totalOrder.toString()
                 onItemClick.invoke(product)
             }
-
         }
     }
 
@@ -65,5 +63,4 @@ class ProductBasketAdapter :
             return oldItem == newItem
         }
     }
-
 }

@@ -1,11 +1,8 @@
 package com.emarket.ui.detail
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.emarket.data.remote.Product
-import com.emarket.data.remote.ServiceInterface
-import com.emarket.data.repository.ServiceRepositoryImpl
 import com.emarket.domain.usecase.GetDataBaseItemCount
 import com.emarket.domain.usecase.InsertDataBaseUseCase
 import com.emarket.domain.usecase.UpdateFavoriteUseCase
@@ -29,15 +26,18 @@ class ProductDetailViewModel @Inject constructor(
             updateFavoriteUseCase(product)
         }
     }
+
     fun updateDataBase(item: Product) {
         viewModelScope.launch {
             insertDataBaseUseCase(item)
+            getDataBaseItemCount()
         }
-        getDataBaseItemCount()
+
     }
-    fun getDataBaseItemCount(){
+
+    fun getDataBaseItemCount() {
         viewModelScope.launch {
-            getDataBaseItemCounter().collect{
+            getDataBaseItemCounter().collect {
                 _databaseCounter.value = it
             }
         }

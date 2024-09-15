@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -9,7 +8,7 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/size0"
         android:fillViewport="true"
         android:fitsSystemWindows="true"
         app:layout_constraintBottom_toTopOf="@+id/filter_primary_button"
@@ -23,7 +22,6 @@
                 android:id="@+id/filter_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -31,23 +29,43 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:background="@color/blueAppColor"
-                    android:elevation="4dp"
-                    app:title="E-Market"
+                    android:layout_height="@dimen/size28"
+                    android:background="@color/white"
                     app:titleTextColor="@android:color/white" />
 
             </com.google.android.material.appbar.AppBarLayout>
+
+            <ImageView
+                android:id="@+id/filters_close_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size10"
+                android:src="@drawable/close_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/filter_toolbar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/filter"
+                android:textColor="@color/black"
+                android:textSize="@dimen/header2Size"
+                app:layout_constraintBottom_toBottomOf="@+id/filter_toolbar"
+                app:layout_constraintEnd_toEndOf="@+id/filter_toolbar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/filter_toolbar" />
 
             <TextView
                 android:id="@+id/sort_by_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-light"
-                android:text="Sort By"
-                android:textSize="12sp"
+                android:layout_marginStart="@dimen/size8"
+                android:layout_marginTop="@dimen/size8"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/sort_by"
+                android:textSize="@dimen/body4Size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/filter_toolbar" />
 
@@ -90,9 +108,9 @@
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/materialDivider"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="@dimen/oneDp"
+                android:layout_marginHorizontal="@dimen/size5"
+                android:layout_marginTop="@dimen/size4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,11 +120,11 @@
                 android:id="@+id/brand_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-light"
+                android:layout_marginStart="@dimen/size8"
+                android:layout_marginTop="@dimen/size8"
+                android:fontFamily="@font/montserrat"
                 android:text="@string/brand"
-                android:textSize="12sp"
+                android:textSize="@dimen/body4Size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialDivider" />
 
@@ -115,15 +133,15 @@
                 style="@style/SearchBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="@dimen/size12"
+                android:layout_marginTop="@dimen/size4"
                 android:imeOptions="actionSearch"
                 app:layout_constraintTop_toBottomOf="@+id/brand_text" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/brand_recyclerview"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/size0"
+                android:layout_height="@dimen/size50"
                 app:layout_constraintEnd_toEndOf="@+id/brand_searchbar"
                 app:layout_constraintStart_toStartOf="@+id/brand_searchbar"
                 app:layout_constraintTop_toBottomOf="@+id/brand_searchbar" />
@@ -131,9 +149,9 @@
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/materialDivider2"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="@dimen/oneDp"
+                android:layout_marginHorizontal="@dimen/size5"
+                android:layout_marginTop="@dimen/size4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -143,10 +161,10 @@
                 android:id="@+id/filter_model_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-light"
+                android:layout_marginTop="@dimen/size8"
+                android:fontFamily="@font/montserrat"
                 android:text="@string/model"
-                android:textSize="12sp"
+                android:textSize="@dimen/body4Size"
                 app:layout_constraintStart_toStartOf="@+id/brand_text"
                 app:layout_constraintTop_toBottomOf="@+id/materialDivider2" />
 
@@ -155,15 +173,15 @@
                 style="@style/SearchBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="@dimen/size12"
+                android:layout_marginTop="@dimen/size4"
                 android:imeOptions="actionSearch"
                 app:layout_constraintTop_toBottomOf="@+id/filter_model_text" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/filter_model_recyclerview"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/size0"
+                android:layout_height="@dimen/size50"
                 app:layout_constraintEnd_toEndOf="@+id/filter_model_searchbar"
                 app:layout_constraintStart_toStartOf="@+id/filter_model_searchbar"
                 app:layout_constraintTop_toBottomOf="@+id/filter_model_searchbar" />
@@ -175,9 +193,9 @@
         android:id="@+id/filter_primary_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="@dimen/size8"
+        android:layout_marginTop="@dimen/size4"
+        android:layout_marginBottom="@dimen/size4"
         android:background="@drawable/button_background"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/primary"

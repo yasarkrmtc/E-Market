@@ -8,7 +8,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.emarket.R
 import com.emarket.base.BaseFragment
 import com.emarket.data.remote.Product
@@ -54,7 +53,6 @@ class ProductBasketFragment :
             )
         }
 
-        // Handle complete button click
         binding.completeButton.setOnClickListener {
             if (basketAdapter.currentList.isNotEmpty()) {
                 viewModel.clearDatabase()

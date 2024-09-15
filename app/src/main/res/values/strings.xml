@@ -27,4 +27,10 @@
     <string name="complete">Complete</string>
     <string name="product_name">Product Name</string>
     <string name="_0_00">0.00</string>
+    <string name="e_market">E-Market</string>
+    <string name="sort_by">Sort By</string>
+    <string name="_15_000">15.000 ₺</string>
+    <string name="iphone_13_pro_max_256gb">iPhone 13 Pro Max 256Gb</string>
+    <string name="filter">Filter</string>
+    <string name="aston_martin">Aston Martin</string>
 </resources>

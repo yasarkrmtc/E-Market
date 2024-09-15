@@ -26,10 +26,9 @@ class FavoriteAdapter(
 
     override fun getItemCount(): Int = favoriteList.size
 
-    // Method to update the list
     fun updateList(newList: List<FavoriteItemEntity>) {
         favoriteList = newList
-        notifyDataSetChanged() // Consider using DiffUtil for more efficient updates
+        notifyDataSetChanged()
     }
 
     inner class FavoriteViewHolder(private val binding: FavoriteFragmentItemBinding) :
@@ -48,4 +47,3 @@ class FavoriteAdapter(
         }
     }
 }
-

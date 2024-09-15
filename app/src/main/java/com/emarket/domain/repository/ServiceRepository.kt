@@ -12,5 +12,4 @@ interface ServiceRepository {
     suspend fun deleteAllItems()
     suspend fun updateFavoriteUseCase(item: Product)
     suspend fun getItemsCount():Flow<Int>
-
 }

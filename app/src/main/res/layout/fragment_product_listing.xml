@@ -20,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/blueAppColor"
-            android:elevation="4dp"
-            app:title="E-Market"
+            app:title="@string/e_market"
             app:titleTextColor="@android:color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -34,13 +33,12 @@
         android:layout_marginStart="@dimen/size9"
         android:layout_marginTop="@dimen/size8"
         android:layout_marginEnd="@dimen/size9"
+        android:imeOptions="actionSearch"
+        android:inputType="textCapSentences"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        android:inputType="textCapSentences"
         app:layout_constraintStart_toStartOf="parent"
-        android:imeOptions="actionSearch"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
 
     <TextView
         android:id="@+id/filtersText"
@@ -58,12 +56,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size5"
-        android:background="#F2F0FA"
+        android:background="@color/darkGrey"
+        android:padding="@dimen/size5"
         android:fontFamily="@font/montserrat_light"
         android:paddingHorizontal="@dimen/size4"
         android:paddingVertical="@dimen/size2"
         android:text="@string/select_filter"
+        android:gravity="center"
+        android:textStyle="bold"
         android:textSize="@dimen/body4Size"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/homeSearchbar"
         app:layout_constraintTop_toBottomOf="@+id/homeSearchbar" />
 
@@ -76,6 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ProgressBar
         android:id="@+id/item_proggress"
         android:layout_width="wrap_content"
@@ -83,8 +86,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-     />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"

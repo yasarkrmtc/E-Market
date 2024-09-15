@@ -1,6 +1,5 @@
 package com.emarket.domain.usecase
 
-
 import com.emarket.data.repository.ServiceRepositoryImpl
 import javax.inject.Inject
 
