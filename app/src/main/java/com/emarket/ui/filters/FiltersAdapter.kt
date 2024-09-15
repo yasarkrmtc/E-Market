@@ -25,12 +25,14 @@ class FiltersAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: String) {
-            binding.checkbox.text = item
-            binding.checkbox.setOnCheckedChangeListener(null)
-            binding.checkbox.isChecked = false
+            binding.checkbox.apply {
+                text = item
+                setOnCheckedChangeListener(null)
+                isChecked = false
 
-            binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
-                onItemCheckedChanged(item, isChecked)
+                setOnCheckedChangeListener { _, isChecked ->
+                    onItemCheckedChanged(item, isChecked)
+                }
             }
         }
     }

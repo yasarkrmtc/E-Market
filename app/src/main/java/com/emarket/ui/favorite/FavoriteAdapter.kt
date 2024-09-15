@@ -20,8 +20,7 @@ class FavoriteAdapter(
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        val product = favoriteList[position]
-        holder.bind(product)
+        holder.bind(favoriteList[position])
     }
 
     override fun getItemCount(): Int = favoriteList.size
@@ -35,14 +34,16 @@ class FavoriteAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: FavoriteItemEntity) {
-            binding.productName.text = product.name
-            binding.productPrice.text = product.price
-            Glide.with(binding.root.context)
-                .load(product.image)
-                .into(binding.productImage)
+            with(binding) {
+                productName.text = product.name
+                productPrice.text = product.price
+                Glide.with(root.context)
+                    .load(product.image)
+                    .into(productImage)
 
-            binding.deleteFavoriteButton.setOnClickListener {
-                onDeleteClick.invoke(product)
+                deleteFavoriteButton.setOnClickListener {
+                    onDeleteClick.invoke(product)
+                }
             }
         }
     }

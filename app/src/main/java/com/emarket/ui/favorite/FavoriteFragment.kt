@@ -26,26 +26,24 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
     }
 
     private fun setupRecyclerView() {
-        favoriteAdapter = FavoriteAdapter(
-            favoriteList = listOf(),
-            onDeleteClick = { product ->
-                viewModel.deleteFavorite(product)
-            }
-        )
+        favoriteAdapter = FavoriteAdapter(onDeleteClick = viewModel::deleteFavorite)
 
-        binding.favoriteRecyclerView.layoutManager =
-            GridLayoutManager(requireContext(), 1)
-        binding.favoriteRecyclerView.adapter = favoriteAdapter
+        binding.favoriteRecyclerView.apply {
+            layoutManager = GridLayoutManager(requireContext(), 1)
+            adapter = favoriteAdapter
+            addItemDecoration(createItemDecoration())
+        }
+    }
 
+    private fun createItemDecoration(): CustomAdaptiveDecoration {
         val spacing = resources.getDimensionPixelSize(R.dimen.size1)
-        val itemDecoration = CustomAdaptiveDecoration(
+        return CustomAdaptiveDecoration(
             context = requireContext(),
             spanCount = 1,
             spacingHorizontal = spacing,
             spacingVertical = spacing,
             includeEdge = true
         )
-        binding.favoriteRecyclerView.addItemDecoration(itemDecoration)
     }
 
     private fun observeFavoriteProducts() {

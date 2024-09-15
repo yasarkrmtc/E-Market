@@ -10,6 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.emarket.R
 import com.emarket.base.BaseFragment
+import com.emarket.data.local.ItemEntity
 import com.emarket.data.remote.Product
 import com.emarket.databinding.FragmentProductBasketBinding
 import com.emarket.ui.MainActivity
@@ -28,72 +29,66 @@ class ProductBasketFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-
+        setupListeners()
         observeData()
-        viewModel.getLocalItems()
-        viewModel.getTotalPrice()
-        viewModel.getDataBaseItemCount()
-        initListeners()
+        viewModel.apply {
+            getLocalItems()
+            getTotalPrice()
+            getDataBaseItemCount()
+        }
     }
 
-    private fun initListeners() {
-        basketAdapter.onItemClick {
-            viewModel.updateDataBase(
-                Product(
-                    id = it.id,
-                    createdAt = it.createdAt,
-                    name = it.name,
-                    image = it.image,
-                    price = it.price,
-                    description = it.description,
-                    model = it.model,
-                    brand = it.brand,
-                    totalOrder = it.totalOrder
-                )
-            )
+    private fun setupListeners() {
+        basketAdapter.setOnItemClickListener {
+            viewModel.updateDataBase(it.toProduct())
         }
 
         binding.completeButton.setOnClickListener {
             if (basketAdapter.currentList.isNotEmpty()) {
                 viewModel.clearDatabase()
-                Toast.makeText(requireContext(), "Completed", Toast.LENGTH_SHORT).show()
+                showToast("Completed")
             } else {
-                Toast.makeText(requireContext(), "No items to complete", Toast.LENGTH_SHORT).show()
+                showToast("No items to complete")
             }
         }
     }
 
-    private fun setupRecyclerView() {
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
-        binding.recyclerView.adapter = basketAdapter
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
 
+    private fun setupRecyclerView() {
+        binding.recyclerView.apply {
+            layoutManager = GridLayoutManager(requireContext(), 1)
+            adapter = basketAdapter
+            addItemDecoration(createItemDecoration())
+        }
+    }
+
+    private fun createItemDecoration(): CustomAdaptiveDecoration {
         val spacing = resources.getDimensionPixelSize(R.dimen.size1)
-        val itemDecoration = CustomAdaptiveDecoration(
+        return CustomAdaptiveDecoration(
             context = requireContext(),
             spanCount = 1,
             spacingHorizontal = spacing,
             spacingVertical = spacing,
             includeEdge = true
         )
-        binding.recyclerView.addItemDecoration(itemDecoration)
     }
-
 
     private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.items.collect { items ->
-                if (items.isNotEmpty()) {
-                    basketAdapter.submitList(items)
-                } else {
-                    basketAdapter.submitList(listOf())
-                }
+                basketAdapter.submitList(items)
             }
         }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.databaseCounter.collectLatest { count ->
                 (requireActivity() as MainActivity).updateBottomNavigationBadge(count)
             }
         }
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.localPrice.collect { price ->
@@ -101,5 +96,19 @@ class ProductBasketFragment :
                 }
             }
         }
+    }
+
+    private fun ItemEntity.toProduct(): Product {
+        return Product(
+            id = id,
+            createdAt = createdAt,
+            name = name,
+            image = image,
+            price = price,
+            description = description,
+            model = model,
+            brand = brand,
+            totalOrder = totalOrder
+        )
     }
 }
