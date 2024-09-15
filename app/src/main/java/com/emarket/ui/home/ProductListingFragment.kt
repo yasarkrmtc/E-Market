@@ -33,62 +33,22 @@ class ProductListingFragment :
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-        setupFilterListener()
-        setupSearchListener()
-        observeViewModel()
-        observeAdapterLoadState()
-    }
-
-    private fun setupRecyclerView() {
-        binding.rv.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = productListingAdapter
-            addItemDecoration(createItemDecoration())
-        }
-
-        productListingAdapter.setItemClickListener {
-            viewModel.updateDataBase(it)
-        }
-
-        productListingAdapter.setProductClickListener {
-            val action = ProductListingFragmentDirections
-                .actionProductListingFragmentToProductDetailFragment(it)
-            findNavController().navigate(action)
-        }
-
-        productListingAdapter.setFavoriteClickListener {
-            viewModel.updateFavorite(it)
-        }
-    }
-
-    private fun createItemDecoration(): CustomAdaptiveDecoration {
-        val spacing = resources.getDimensionPixelSize(R.dimen.size3)
-        return CustomAdaptiveDecoration(
-            context = requireContext(),
-            spanCount = 2,
-            spacingHorizontal = spacing,
-            spacingVertical = spacing,
-            includeEdge = true
-        )
-    }
-
-    private fun setupFilterListener() {
-        setFragmentResultListener("filterResult") { _, bundle ->
+        viewModel.getDataBaseItemCount()
+        setFragmentResultListener("filterResult") { key, bundle ->
             val selectedBrands = bundle.getStringArrayList("selectedBrands") ?: listOf()
             val selectedModels = bundle.getStringArrayList("selectedModels") ?: listOf()
             val selectedSortBy = bundle.getString("selectedSortBy") ?: ""
 
-            viewModel.updateSelectedBrands(selectedBrands.joinToString(separator = "|"))
-            viewModel.updateSelectedModels(selectedModels.joinToString(separator = "|"))
+            val selectedBrandsString = selectedBrands.joinToString(separator = "|")
+            val selectedModelsString = selectedModels.joinToString(separator = "|")
+            viewModel.updateSelectedBrands(selectedBrandsString)
+            viewModel.updateSelectedModels(selectedModelsString)
             viewModel.updateSelectedSortBy(selectedSortBy)
         }
 
         binding.selectFilterText.clickWithDebounce {
             findNavController().navigate(R.id.action_productListingFragment_to_filtersFragment)
         }
-    }
-
-    private fun setupSearchListener() {
         binding.homeSearchbar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val newText = s.toString()
@@ -102,9 +62,7 @@ class ProductListingFragment :
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
-    }
 
-    private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.productsFlow.collectLatest { pagingData ->
                 productListingAdapter.submitData(pagingData)
@@ -116,9 +74,21 @@ class ProductListingFragment :
                 (requireActivity() as MainActivity).updateBottomNavigationBadge(count)
             }
         }
-    }
 
-    private fun observeAdapterLoadState() {
+        productListingAdapter.itemClick { product ->
+            viewModel.updateDataBase(product)
+
+        }
+        productListingAdapter.productClick {
+            val action = ProductListingFragmentDirections
+                .actionProductListingFragmentToProductDetailFragment(it)
+            findNavController().navigate(action)
+        }
+
+        productListingAdapter.favoriteClick {
+            viewModel.updateFavorite(it)
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             productListingAdapter.loadStateFlow.collectLatest { loadState ->
                 val isListEmpty =
@@ -129,6 +99,7 @@ class ProductListingFragment :
                     binding.itemProggress.visibility = View.INVISIBLE
                 } else {
                     binding.itemProggress.visibility = View.GONE
+
                 }
                 binding.itemProggress.isVisible =
                     loadState.source.refresh is LoadState.Loading || loadState.append is LoadState.Loading
@@ -145,5 +116,20 @@ class ProductListingFragment :
                 }
             }
         }
+    }
+
+    private fun setupRecyclerView() {
+        binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rv.adapter = productListingAdapter
+
+        val spacing = resources.getDimensionPixelSize(R.dimen.size3)
+        val itemDecoration = CustomAdaptiveDecoration(
+            context = requireContext(),
+            spanCount = 2,
+            spacingHorizontal = spacing,
+            spacingVertical = spacing,
+            includeEdge = true
+        )
+        binding.rv.addItemDecoration(itemDecoration)
     }
 }

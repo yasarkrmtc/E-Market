@@ -8,7 +8,6 @@ import com.emarket.domain.usecase.InsertDataBaseUseCase
 import com.emarket.domain.usecase.UpdateFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,7 +19,7 @@ class ProductDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _databaseCounter = MutableStateFlow(0)
-    val databaseCounter = _databaseCounter.asStateFlow()
+    val databaseCounter: MutableStateFlow<Int> = _databaseCounter
 
     fun updateFavoriteStatus(product: Product) {
         viewModelScope.launch {
@@ -33,6 +32,7 @@ class ProductDetailViewModel @Inject constructor(
             insertDataBaseUseCase(item)
             getDataBaseItemCount()
         }
+
     }
 
     fun getDataBaseItemCount() {
