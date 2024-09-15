@@ -14,20 +14,22 @@ import com.emarket.utils.clickWithDebounce
 class ProductListingAdapter :
     PagingDataAdapter<Product, ProductListingAdapter.ProductViewHolder>(PRODUCT_COMPARATOR) {
 
-    private var onItemClick: (item: Product) -> Unit = {}
-    private var onProductClick: (item: Product) -> Unit = {}
-    private var onFavoriteClick: (item: Product) -> Unit = {}
+    private var itemClick: (item: Product) -> Unit = { item -> }
 
-    fun setItemClickListener(listener: (Product) -> Unit) {
-        onItemClick = listener
+    fun itemClick(item: (Product) -> Unit) {
+        itemClick = item
     }
 
-    fun setProductClickListener(listener: (Product) -> Unit) {
-        onProductClick = listener
+    private var productClick: (item: Product) -> Unit = { item -> }
+
+    fun productClick(item: (Product) -> Unit) {
+        productClick = item
     }
 
-    fun setFavoriteClickListener(listener: (Product) -> Unit) {
-        onFavoriteClick = listener
+    private var favoriteClick: (item: Product) -> Unit = { item -> }
+
+    fun favoriteClick(item: (Product) -> Unit) {
+        favoriteClick = item
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -48,39 +50,31 @@ class ProductListingAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
-            with(binding) {
-                productName.text = product.name
-                productPrice.text = product.price
-                favoriteIcon.isSelected = product.isFavorite
+            binding.productName.text = product.name
+            binding.productPrice.text = product.price
 
-                Glide.with(root.context)
-                    .load(product.image)
-                    .into(productImage)
-
-                favoriteIcon.clickWithDebounce {
-                    toggleFavorite(product)
-                }
-
-                addToCartButton.clickWithDebounce {
-                    addToCart(product)
-                }
-
-                root.clickWithDebounce {
-                    onProductClick.invoke(product)
-                }
-            }
-        }
-
-        private fun toggleFavorite(product: Product) {
-            product.isFavorite = !product.isFavorite
-            onFavoriteClick.invoke(product)
             binding.favoriteIcon.isSelected = product.isFavorite
-        }
 
-        private fun addToCart(product: Product) {
-            product.totalOrder += 1
-            onItemClick.invoke(product)
-            Toast.makeText(binding.root.context, "${product.name} added to cart", Toast.LENGTH_SHORT).show()
+            binding.favoriteIcon.clickWithDebounce {
+                product.isFavorite = !product.isFavorite
+                favoriteClick.invoke(product)
+
+                binding.favoriteIcon.isSelected = product.isFavorite
+            }
+
+            Glide.with(binding.root.context)
+                .load(product.image)
+                .into(binding.productImage)
+
+            binding.addToCartButton.clickWithDebounce {
+                product.totalOrder += 1
+                itemClick.invoke(product)
+                Toast.makeText(binding.root.context, "${product.name} added to cart", Toast.LENGTH_SHORT).show()
+            }
+
+            binding.root.clickWithDebounce {
+                productClick.invoke(product)
+            }
         }
     }
 
