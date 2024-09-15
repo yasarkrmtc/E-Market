@@ -27,10 +27,10 @@ class ServiceRepositoryImpl @Inject constructor(
     override suspend fun deleteAllItems() {
         return cartDAO.deleteAll()
     }
-      fun getLocalFavoriteItems(): Flow<List<FavoriteItemEntity>> {
+    fun getLocalFavoriteItems(): Flow<List<FavoriteItemEntity>> {
         return favoriteDAO.getAllItems()
     }
-     suspend fun getFavoriteProductById(productId: String): FavoriteItemEntity? {
+    suspend fun getFavoriteProductById(productId: String): FavoriteItemEntity? {
         return favoriteDAO.getItemById(productId)
     }
 
@@ -114,5 +114,4 @@ class ServiceRepositoryImpl @Inject constructor(
         }
 
     }
-
 }

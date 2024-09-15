@@ -8,9 +8,9 @@ import java.io.IOException
 
 class PagingDataSource(
     private val serviceInterface: ServiceInterface,
-    private val selectedBrands: String, // Parameter for selected brands
-    private val selectedModels: String, // Parameter for selected models
-    private val selectedSortBy: String  // Added parameter for selected sort option
+    private val selectedBrands: String,
+    private val selectedModels: String,
+    private val selectedSortBy: String
 ) : PagingSource<Int, Product>() {
 
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
@@ -44,10 +44,8 @@ class PagingDataSource(
                 )
             } else {
                 if (response.code() == 404) {
-                    // Log a specific message for 404
                     return LoadResult.Error(Exception("Veri Bulunamadı"))
                 } else {
-                    // Log general HTTP error
                     Log.e("Error", "HTTP error: ${response.code()} - ${response.message()}")
                     return LoadResult.Error(Exception("HTTP error: ${response.code()}"))
                 }

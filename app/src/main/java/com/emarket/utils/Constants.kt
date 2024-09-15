@@ -4,6 +4,7 @@ object Constants {
     const val debounceTime = 600L
     const val BASE_URL = "https://5fc9346b2af77700165ae514.mockapi.io/"
 
+
     val brands = listOf(
         "Lamborghini", "Smart", "Ferrari", "Volkswagen", "Mercedes Benz",
         "Tesla", "Fiat", "Land Rover", "Nissan", "Rolls Royce",
@@ -23,6 +24,4 @@ object Constants {
         "Colorado", "Explorer", "Beetle", "PT Cruiser", "Ranchero",
         "XTS", "2", "1", "Malibu", "Spyder"
     )
-
-
 }
