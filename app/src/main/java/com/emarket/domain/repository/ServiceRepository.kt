@@ -11,5 +11,6 @@ interface ServiceRepository {
     suspend fun getLocalItem(id:String): ItemEntity?
     suspend fun deleteAllItems()
     suspend fun updateFavoriteUseCase(item: Product)
+    suspend fun getItemsCount():Flow<Int>
 
 }

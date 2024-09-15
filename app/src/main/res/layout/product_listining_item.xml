@@ -5,7 +5,6 @@
     android:id="@+id/productCardItem"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
     android:elevation="@dimen/size2"
     android:padding="@dimen/size5">
 
@@ -50,7 +49,6 @@
         app:layout_constraintStart_toStartOf="@+id/product_image"
         app:layout_constraintTop_toBottomOf="@id/product_image" />
 
-    <!-- Product Name -->
     <TextView
         android:id="@+id/product_name"
         android:layout_width="0dp"
@@ -58,6 +56,8 @@
         android:layout_marginTop="@dimen/size7"
         android:fontFamily="@font/montserrat"
         android:text="iPhone 13 Pro Max 256Gb"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/product_image"
@@ -70,6 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size7"
         android:layout_marginEnd="@dimen/size5"
+        android:layout_marginStart="@dimen/size5"
         android:layout_marginBottom="@dimen/size5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,10 +78,11 @@
         app:layout_constraintTop_toBottomOf="@+id/product_name">
 
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/add_to_cart_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:backgroundTint="@color/blueAppColor"
             android:background="@drawable/button_background"
             android:fontFamily="@font/montserrat"
             android:gravity="center"

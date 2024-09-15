@@ -8,7 +8,7 @@ import com.emarket.data.local.FavoriteItemEntity
 import com.emarket.databinding.FavoriteFragmentItemBinding
 
 class FavoriteAdapter(
-    private val favoriteList: List<FavoriteItemEntity>,
+    private var favoriteList: List<FavoriteItemEntity> = listOf(),
     private val onDeleteClick: (FavoriteItemEntity) -> Unit
 ) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
@@ -26,6 +26,12 @@ class FavoriteAdapter(
 
     override fun getItemCount(): Int = favoriteList.size
 
+    // Method to update the list
+    fun updateList(newList: List<FavoriteItemEntity>) {
+        favoriteList = newList
+        notifyDataSetChanged() // Consider using DiffUtil for more efficient updates
+    }
+
     inner class FavoriteViewHolder(private val binding: FavoriteFragmentItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -42,3 +48,4 @@ class FavoriteAdapter(
         }
     }
 }
+

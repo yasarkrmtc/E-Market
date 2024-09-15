@@ -3,12 +3,16 @@ package com.emarket.ui.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.emarket.base.BaseFragment
 import com.emarket.data.remote.Product
 import com.emarket.databinding.FragmentProductDetailBinding
+import com.emarket.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProductDetailFragment :
@@ -21,7 +25,7 @@ class ProductDetailFragment :
         super.onViewCreated(view, savedInstanceState)
 
         val product = args.product
-
+        viewModel.getDataBaseItemCount()
         binding.apply {
             detailName.text = product.name
             detailPriceText.text = product.price
@@ -31,19 +35,22 @@ class ProductDetailFragment :
                 .load(product.image)
                 .into(detailImage)
 
-            // Set initial favorite state
             detailFavouriteStar.isSelected = product.isFavorite
 
-            // Handle favorite state toggle
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.databaseCounter.collectLatest { count ->
+                    (requireActivity() as MainActivity).updateBottomNavigationBadge(count)
+                }
+            }
             detailFavouriteStar.setOnClickListener {
                 product.isFavorite = !product.isFavorite
                 detailFavouriteStar.isSelected = product.isFavorite
-                // Update favorite status in ViewModel
                 viewModel.updateFavoriteStatus(product)
             }
 
             productDetailButton.setOnClickListener {
-                // Handle add to cart action
+                val newProduct = product.copy(totalOrder = product.totalOrder+1)
+               viewModel.updateDataBase(newProduct)
             }
         }
     }

@@ -25,4 +25,6 @@
     <string name="profile_fragment">Profile Fragment</string>
     <string name="coming_soon">Coming soon!</string>
     <string name="complete">Complete</string>
+    <string name="product_name">Product Name</string>
+    <string name="_0_00">0.00</string>
 </resources>

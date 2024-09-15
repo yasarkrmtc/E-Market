@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.emarket.data.local.ItemEntity
 import com.emarket.data.remote.Product
 import com.emarket.domain.usecase.DeleteAllItemsUseCase
+import com.emarket.domain.usecase.GetDataBaseItemCount
 import com.emarket.domain.usecase.GetLocalItemsUseCase
 import com.emarket.domain.usecase.GetTotalPriceUseCase
 import com.emarket.domain.usecase.InsertDataBaseUseCase
@@ -22,9 +23,13 @@ class ProductBasketViewModel @Inject constructor(
     private val getTotalPriceUseCase: GetTotalPriceUseCase,
     private val insertDataBaseUseCase: InsertDataBaseUseCase,
     private val deleteAllItemsUseCase: DeleteAllItemsUseCase,
+    private val getDataBaseItemCounter: GetDataBaseItemCount
 ) : ViewModel() {
     private val _items = MutableStateFlow<List<ItemEntity>>(emptyList())
     val items: StateFlow<List<ItemEntity>> = _items
+
+    private val _databaseCounter = MutableStateFlow(0)
+    val databaseCounter: MutableStateFlow<Int> = _databaseCounter
 
     private val _localPrice = MutableStateFlow("₺0.00")
     val localPrice = _localPrice.asStateFlow()
@@ -54,6 +59,7 @@ class ProductBasketViewModel @Inject constructor(
             getLocalItems()
             getTotalPrice()
         }
+        getDataBaseItemCount()
 
     }
 
@@ -62,6 +68,14 @@ class ProductBasketViewModel @Inject constructor(
             deleteAllItemsUseCase()
             getLocalItems()
             getTotalPrice()
+        }
+        getDataBaseItemCount()
+    }
+    fun getDataBaseItemCount(){
+        viewModelScope.launch {
+            getDataBaseItemCounter().collect{
+                _databaseCounter.value = it
+            }
         }
     }
 

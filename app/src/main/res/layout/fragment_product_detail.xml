@@ -98,11 +98,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/product_detail_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        app:backgroundTint="@color/blueAppColor"
         android:background="@drawable/button_background"
         android:fontFamily="@font/montserrat"
         android:minHeight="0dp"

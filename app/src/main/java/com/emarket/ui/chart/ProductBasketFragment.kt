@@ -7,11 +7,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.emarket.R
 import com.emarket.base.BaseFragment
 import com.emarket.data.remote.Product
 import com.emarket.databinding.FragmentProductBasketBinding
+import com.emarket.ui.MainActivity
+import com.emarket.utils.CustomAdaptiveDecoration
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -28,6 +33,7 @@ class ProductBasketFragment :
         observeData()
         viewModel.getLocalItems()
         viewModel.getTotalPrice()
+        viewModel.getDataBaseItemCount()
         initListeners()
     }
 
@@ -60,9 +66,20 @@ class ProductBasketFragment :
     }
 
     private fun setupRecyclerView() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
         binding.recyclerView.adapter = basketAdapter
+
+        val spacing = resources.getDimensionPixelSize(R.dimen.size1)
+        val itemDecoration = CustomAdaptiveDecoration(
+            context = requireContext(),
+            spanCount = 1,
+            spacingHorizontal = spacing,
+            spacingVertical = spacing,
+            includeEdge = true
+        )
+        binding.recyclerView.addItemDecoration(itemDecoration)
     }
+
 
     private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -72,6 +89,11 @@ class ProductBasketFragment :
                 } else {
                     basketAdapter.submitList(listOf())
                 }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.databaseCounter.collectLatest { count ->
+                (requireActivity() as MainActivity).updateBottomNavigationBadge(count)
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {

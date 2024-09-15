@@ -71,6 +71,10 @@ class ServiceRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getItemsCount(): Flow<Int> {
+        return cartDAO.getItemsCount()
+    }
+
     override suspend fun insertDataBaseItem(item: Product) {
         if (item.totalOrder == 0) {
             cartDAO.delete(

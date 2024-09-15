@@ -19,6 +19,12 @@ class ProductListingAdapter :
         itemClick = item
     }
 
+    private var productClick: (item: Product) -> Unit = { item -> }
+
+    fun productClick(item: (Product) -> Unit) {
+        productClick = item
+    }
+
     private var favoriteClick: (item: Product) -> Unit = { item -> }
 
     fun favoriteClick(item: (Product) -> Unit) {
@@ -64,9 +70,11 @@ class ProductListingAdapter :
                 itemClick.invoke(product)
             }
 
-            binding.productImage.clickWithDebounce {
-                itemClick.invoke(product)
+
+            binding.root.clickWithDebounce {
+                productClick.invoke(product)
             }
+
         }
     }
 
