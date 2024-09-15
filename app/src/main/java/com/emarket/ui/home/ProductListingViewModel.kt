@@ -20,7 +20,6 @@ import com.emarket.domain.usecase.UpdateFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
@@ -37,23 +36,26 @@ class ProductListingViewModel @Inject constructor(
     private val getDataBaseItemCounter: GetDataBaseItemCount
 
 ) : ViewModel() {
+    init {
+        savedStateHandle["PAGING_ID"] = 1
+    }
 
     private val _searchQuery = MutableStateFlow("")
+    val searchQuery: MutableStateFlow<String> = _searchQuery
+
     private val _databaseCounter = MutableStateFlow(0)
+    val databaseCounter: MutableStateFlow<Int> = _databaseCounter
+
     private val _selectedBrands = MutableStateFlow("")
     private val _selectedModels = MutableStateFlow("")
     private val _selectedSortBy = MutableStateFlow("")
 
-    val searchQuery = _searchQuery
-    val databaseCounter = _databaseCounter.asStateFlow()
-
-    val productsFlow: Flow<PagingData<Product>> = combine(
-        searchQuery, _selectedBrands, _selectedModels, _selectedSortBy
-    ) { query, brands, models, sortBy ->
+    val productsFlow: Flow<PagingData<Product>> = combine(searchQuery, _selectedBrands, _selectedModels, _selectedSortBy) { query, brands, models, sortBy ->
         FilterCriteria(query, brands, models, sortBy)
     }.flatMapLatest { criteria ->
         getProducts(criteria.query, criteria.brands, criteria.models, criteria.sortBy)
     }.cachedIn(viewModelScope)
+
 
     private fun getProducts(query: String, selectedBrands: String, selectedModels: String, selectedSortBy: String): Flow<PagingData<Product>> {
         return Pager(
@@ -64,10 +66,14 @@ class ProductListingViewModel @Inject constructor(
                 prefetchDistance = 1
             )
         ) {
-            PagingDataSource(serviceInterface, selectedBrands, selectedModels, selectedSortBy)
+            PagingDataSource(serviceInterface, selectedBrands, selectedModels, selectedSortBy) // Modify PagingDataSource constructor if needed
         }.flow.map { pagingData ->
             pagingData.map { product ->
-                product.copy(isFavorite = repository.getFavoriteProductById(product.id) != null)
+                val favoriteProduct = repository.getFavoriteProductById(product.id)
+                if (favoriteProduct != null) {
+                    product.isFavorite = true
+                }
+                product
             }.filter { product ->
                 product.name.contains(query, ignoreCase = true)
             }
@@ -81,8 +87,11 @@ class ProductListingViewModel @Inject constructor(
     fun updateDataBase(item: Product) {
         viewModelScope.launch {
             insertDataBaseUseCase(item)
+
             getDataBaseItemCount()
+
         }
+        getDataBaseItemCount()
     }
 
     fun updateFavorite(item: Product) {
@@ -102,12 +111,12 @@ class ProductListingViewModel @Inject constructor(
     fun updateSelectedModels(models: String) {
         _selectedModels.value = models
     }
-
-    fun getDataBaseItemCount() {
+    fun getDataBaseItemCount(){
         viewModelScope.launch {
-            getDataBaseItemCounter().collect {
-                _databaseCounter.value = it
-            }
+           getDataBaseItemCounter().collect{
+               _databaseCounter.value = it
+           }
         }
     }
 }
+

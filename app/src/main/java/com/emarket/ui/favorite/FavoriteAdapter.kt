@@ -20,31 +20,32 @@ class FavoriteAdapter(
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        holder.bind(favoriteList[position])
+        val product = favoriteList[position]
+        holder.bind(product)
     }
 
     override fun getItemCount(): Int = favoriteList.size
 
+    // Method to update the list
     fun updateList(newList: List<FavoriteItemEntity>) {
         favoriteList = newList
-        notifyDataSetChanged()
+        notifyDataSetChanged() // Consider using DiffUtil for more efficient updates
     }
 
     inner class FavoriteViewHolder(private val binding: FavoriteFragmentItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: FavoriteItemEntity) {
-            with(binding) {
-                productName.text = product.name
-                productPrice.text = product.price
-                Glide.with(root.context)
-                    .load(product.image)
-                    .into(productImage)
+            binding.productName.text = product.name
+            binding.productPrice.text = product.price
+            Glide.with(binding.root.context)
+                .load(product.image)
+                .into(binding.productImage)
 
-                deleteFavoriteButton.setOnClickListener {
-                    onDeleteClick.invoke(product)
-                }
+            binding.deleteFavoriteButton.setOnClickListener {
+                onDeleteClick.invoke(product)
             }
         }
     }
 }
+

@@ -23,19 +23,18 @@ class FavoriteViewModel @Inject constructor(
 
     fun deleteFavorite(product: FavoriteItemEntity) {
         viewModelScope.launch {
-            updateFavoriteUseCase(product.toProduct(isFavorite = false))
+            val productToUpdate = Product(
+                id = product.id,
+                createdAt = product.createdAt,
+                name = product.name,
+                image = product.image,
+                price = product.price,
+                description = product.description,
+                model = product.model,
+                brand = product.brand,
+                isFavorite = false
+            )
+            updateFavoriteUseCase(productToUpdate)
         }
     }
-
-    private fun FavoriteItemEntity.toProduct(isFavorite: Boolean) = Product(
-        id = id,
-        createdAt = createdAt,
-        name = name,
-        image = image,
-        price = price,
-        description = description,
-        model = model,
-        brand = brand,
-        isFavorite = isFavorite
-    )
 }
