@@ -2,7 +2,6 @@ package com.emarket.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -69,12 +68,13 @@ class ProductListingAdapter :
             binding.addToCartButton.clickWithDebounce {
                 product.totalOrder += 1
                 itemClick.invoke(product)
-                Toast.makeText(binding.root.context, "${product.name} added to cart", Toast.LENGTH_SHORT).show()
             }
+
 
             binding.root.clickWithDebounce {
                 productClick.invoke(product)
             }
+
         }
     }
 

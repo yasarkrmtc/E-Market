@@ -19,42 +19,19 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/blueAppColor" />
+            android:background="@color/blueAppColor"
+            android:elevation="4dp"
+            app:title="E-Market"
+            app:titleTextColor="@android:color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
-        android:id="@+id/detail_back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size10"
-        android:src="@drawable/arrow_back_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/product_detail_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/detail_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="@string/aston_martin"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:textSize="@dimen/header2Size"
-        android:ellipsize="end"
-        android:maxLines="1"
-        app:layout_constraintBottom_toBottomOf="@+id/product_detail_toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/product_detail_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/product_detail_toolbar" />
-
-    <ImageView
         android:id="@+id/detail_image"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size100"
-        android:layout_marginHorizontal="@dimen/size8"
-        android:layout_marginTop="@dimen/size8"
+        android:layout_height="200dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -64,11 +41,11 @@
 
     <TextView
         android:id="@+id/detail_name"
-        android:layout_width="@dimen/size0"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size8"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat"
-        android:textSize="@dimen/header1Size"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/detail_image"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/detail_image"
@@ -76,9 +53,9 @@
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="@dimen/size0"
-        android:layout_height="@dimen/size0"
-        android:layout_marginVertical="@dimen/size8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="16dp"
         app:layout_constraintBottom_toTopOf="@+id/detail_price_title"
         app:layout_constraintEnd_toEndOf="@+id/detail_name"
         app:layout_constraintStart_toStartOf="@+id/detail_name"
@@ -90,7 +67,7 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/montserrat_medium"
             android:justificationMode="inter_word"
-            android:textSize="@dimen/body3Size"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@+id/product_detail_name"
             app:layout_constraintStart_toStartOf="@+id/product_detail_name"
             app:layout_constraintTop_toBottomOf="@+id/product_detail_name" />
@@ -100,11 +77,11 @@
         android:id="@+id/detail_price_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size2"
+        android:layout_marginBottom="4dp"
         android:fontFamily="@font/montserrat"
         android:text="@string/price"
-        android:textColor="@color/blueAppColor"
-        android:textSize="@dimen/header3Size"
+        android:textColor="#0000FF"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/detail_price_text"
         app:layout_constraintStart_toStartOf="@+id/detail_price_text" />
 
@@ -112,12 +89,12 @@
         android:id="@+id/detail_price_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size8"
-        android:layout_marginBottom="@dimen/size8"
-        android:fontFamily="@font/montserrat"
+        android:layout_marginStart="16dp"
         android:text="@string/_12_000"
-        android:textSize="@dimen/header3Size"
         android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -125,13 +102,13 @@
         android:id="@+id/product_detail_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/size8"
+        android:layout_marginEnd="16dp"
+        app:backgroundTint="@color/blueAppColor"
         android:background="@drawable/button_background"
         android:fontFamily="@font/montserrat"
-        android:minHeight="@dimen/size0"
+        android:minHeight="0dp"
         android:text="@string/add_to_cart"
-        android:textSize="@dimen/header3Size"
-        app:backgroundTint="@color/blueAppColor"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/detail_price_text"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -139,8 +116,8 @@
         android:id="@+id/detail_favourite_star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size6"
-        android:layout_marginEnd="@dimen/size6"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
         android:src="@drawable/favourite_icon_selector"
         app:layout_constraintEnd_toEndOf="@+id/detail_image"
         app:layout_constraintTop_toTopOf="@+id/detail_image" />

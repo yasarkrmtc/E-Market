@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,10 +30,6 @@ class FiltersFragment :
         val modelItems = models
 
         binding.apply {
-            filtersCloseButton.clickWithDebounce {
-                findNavController().popBackStack()
-            }
-
             brandRecyclerview.layoutManager = LinearLayoutManager(requireContext())
             val brandAdapter = FiltersAdapter { item, isChecked ->
                 if (isChecked) {
@@ -95,6 +92,10 @@ class FiltersFragment :
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
 
+
+
+
+
             binding.filterPrimaryButton.clickWithDebounce {
                 val selectedSortBy = when (binding.radioGroup.checkedRadioButtonId) {
                     R.id.old_to_new -> "createdAt"
@@ -107,12 +108,15 @@ class FiltersFragment :
                 val bundle = Bundle().apply {
                     putStringArrayList("selectedBrands", ArrayList(selectedBrands))
                     putStringArrayList("selectedModels", ArrayList(selectedModels))
-                    putString("selectedSortBy", selectedSortBy)
+                    putString("selectedSortBy", selectedSortBy) // Add the sort value to the bundle
                 }
 
+                // Set the fragment result to pass data back
                 setFragmentResult("filterResult", bundle)
                 findNavController().popBackStack()
             }
         }
     }
 }
+
+

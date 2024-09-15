@@ -35,4 +35,6 @@ interface CartDAO {
 
     @Query("SELECT COUNT(*) FROM items")
     fun getItemsCount(): Flow<Int>
+
+
 }

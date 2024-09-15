@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.emarket.databinding.FiltersPageItemBinding
 
+
 class FiltersAdapter(
     private val onItemCheckedChanged: (String, Boolean) -> Unit
 ) : ListAdapter<String, FiltersAdapter.FilterViewHolder>(FilterDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHolder {
-        val binding =
-            FiltersPageItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = FiltersPageItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FilterViewHolder(binding)
     }
 
@@ -26,8 +26,8 @@ class FiltersAdapter(
 
         fun bind(item: String) {
             binding.checkbox.text = item
-            binding.checkbox.setOnCheckedChangeListener(null)
-            binding.checkbox.isChecked = false
+            binding.checkbox.setOnCheckedChangeListener(null) // Prevent recycling issues
+            binding.checkbox.isChecked = false // Default to unchecked, modify as needed
 
             binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
                 onItemCheckedChanged(item, isChecked)
@@ -37,6 +37,7 @@ class FiltersAdapter(
 
     class FilterDiffCallback : DiffUtil.ItemCallback<String>() {
         override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+            // Assuming the items are unique strings, modify if needed
             return oldItem == newItem
         }
 
@@ -45,3 +46,4 @@ class FiltersAdapter(
         }
     }
 }
+

@@ -20,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/blueAppColor"
-            app:title="@string/e_market"
+            android:elevation="4dp"
+            app:title="E-Market"
             app:titleTextColor="@android:color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -28,7 +29,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size0"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/size5"
         android:layout_marginBottom="@dimen/size12"
         app:layout_constraintBottom_toTopOf="@+id/complete_button"
@@ -40,11 +41,11 @@
         android:id="@+id/detail_price_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size2"
-        android:fontFamily="@font/montserrat"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="sans-serif"
         android:text="@string/price"
-        android:textColor="@color/blueAppColor"
-        android:textSize="@dimen/header3Size"
+        android:textColor="#0000FF"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/price_text"
         app:layout_constraintStart_toStartOf="@+id/price_text" />
 
@@ -52,12 +53,12 @@
         android:id="@+id/price_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size8"
-        android:layout_marginBottom="@dimen/size8"
-        android:fontFamily="@font/montserrat"
+        android:layout_marginStart="16dp"
         android:text="@string/_12_000"
-        android:textSize="@dimen/header3Size"
         android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -65,15 +66,20 @@
         android:id="@+id/complete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/size8"
-        android:layout_marginBottom="@dimen/size8"
-        android:background="@drawable/button_background"
-        android:fontFamily="@font/montserrat"
-        android:minHeight="@dimen/size0"
-        android:text="@string/complete"
-        android:textSize="@dimen/header3Size"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:backgroundTint="@color/blueAppColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:background="@drawable/button_background"
+    android:fontFamily="@font/montserrat"
+    android:minHeight="0dp"
+    android:text="@string/complete"
+    android:textSize="18sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+

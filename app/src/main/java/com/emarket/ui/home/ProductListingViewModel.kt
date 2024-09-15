@@ -40,7 +40,6 @@ class ProductListingViewModel @Inject constructor(
         savedStateHandle["PAGING_ID"] = 1
     }
 
-
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: MutableStateFlow<String> = _searchQuery
 
@@ -67,7 +66,7 @@ class ProductListingViewModel @Inject constructor(
                 prefetchDistance = 1
             )
         ) {
-            PagingDataSource(serviceInterface, selectedBrands, selectedModels, selectedSortBy)
+            PagingDataSource(serviceInterface, selectedBrands, selectedModels, selectedSortBy) // Modify PagingDataSource constructor if needed
         }.flow.map { pagingData ->
             pagingData.map { product ->
                 val favoriteProduct = repository.getFavoriteProductById(product.id)
@@ -76,6 +75,7 @@ class ProductListingViewModel @Inject constructor(
                 }
                 product
             }.filter { product ->
+                // Filter products based on search query
                 product.name.contains(query, ignoreCase = true)
             }
         }
@@ -88,9 +88,8 @@ class ProductListingViewModel @Inject constructor(
     fun updateDataBase(item: Product) {
         viewModelScope.launch {
             insertDataBaseUseCase(item)
-            getDataBaseItemCount()
-
         }
+        getDataBaseItemCount()
     }
 
     fun updateFavorite(item: Product) {
@@ -118,3 +117,4 @@ class ProductListingViewModel @Inject constructor(
         }
     }
 }
+
