@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvProductName"
+        android:layout_width="@dimen/size0"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size9"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/samsung_s22"
+        android:textSize="@dimen/header3Size"
+        app:layout_constraintEnd_toStartOf="@+id/basket_stepper"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="@dimen/size0"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size9"
+        android:layout_marginTop="@dimen/size2"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/_12_000"
+        android:textColor="@color/blueAppColor"
+        app:layout_constraintEnd_toStartOf="@+id/basket_stepper"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
+
+    <LinearLayout
+        android:id="@+id/basket_stepper"
+        android:layout_width="@dimen/size70"
+        android:layout_height="@dimen/size16"
+        android:layout_marginEnd="@dimen/size9"
+        android:background="@drawable/basket_assay_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <TextView
+            android:id="@+id/btnMinus"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="@string/min"
+            android:textAlignment="center"
+            android:textSize="@dimen/header2Size" />
+
+        <TextView
+            android:id="@+id/tvCounter"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/blueAppColor"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="@string/_20"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/header3Size" />
+
+        <TextView
+            android:id="@+id/btnPlus"
+            android:layout_width="@dimen/size0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="@string/plus"
+            android:textAlignment="center"
+            android:textSize="@dimen/header2Size" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

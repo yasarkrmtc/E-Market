@@ -61,6 +61,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
+
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
@@ -97,11 +98,13 @@ dependencies {
 
     // Room
     implementation("androidx.room:room-runtime:2.5.0")
-    kapt("androidx.room:room-compiler:2.5.0")
-    implementation("androidx.room:room-ktx:2.5.0")
-    implementation("androidx.room:room-rxjava2:2.5.0")
-    implementation("androidx.room:room-rxjava3:2.5.0")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.room:room-rxjava2:2.6.1")
+    implementation("androidx.room:room-rxjava3:2.6.1")
 
     // Lottie
     implementation("com.airbnb.android:lottie:6.3.0")
+
+    implementation ("androidx.paging:paging-runtime-ktx:3.0.0-alpha13")
 }

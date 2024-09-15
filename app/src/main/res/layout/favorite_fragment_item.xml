@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/size0"
+    android:paddingHorizontal="@dimen/size4"
+    app:cardCornerRadius="@dimen/size0"
+    app:cardElevation="@dimen/size0">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/size4"
+        android:paddingTop="@dimen/size4">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_product_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:elevation="@dimen/size0"
+            android:scaleType="fitXY"
+            app:cardCornerRadius="@dimen/size8"
+            app:cardElevation="@dimen/size0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="#F2F0FA"
+            app:strokeWidth="@dimen/size1"
+            tools:src="@drawable/ic_launcher_foreground">
+
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="@dimen/size55"
+                android:layout_height="@dimen/size55"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:src="@drawable/ic_launcher_foreground" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size4"
+            android:layout_marginEnd="@dimen/size10"
+            android:ellipsize="end"
+            android:fontFamily="@font/montserrat_bold"
+            android:maxLines="2"
+            android:text="@string/product_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body2Size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/card_product_image"
+            app:layout_constraintTop_toTopOf="@id/card_product_image" />
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size4"
+            android:layout_marginTop="@dimen/size10"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/_0_00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/blueAppColor"
+            android:textSize="@dimen/body3Size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/card_product_image"
+            app:layout_constraintTop_toBottomOf="@id/product_name" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/oneDp"
+            android:layout_marginTop="@dimen/size4"
+            android:background="#F2F0FA"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_product_image" />
+
+        <ImageView
+            android:id="@+id/deleteFavoriteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size2"
+            android:src="@android:drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="@+id/card_product_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/card_product_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

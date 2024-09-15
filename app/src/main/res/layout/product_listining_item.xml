@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/productCardItem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/size2"
+    android:padding="@dimen/size5">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="@dimen/size75"
+            android:layout_height="@dimen/size75"
+            android:layout_marginStart="@dimen/size5"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_marginEnd="@dimen/size5"
+            android:background="@color/darkGrey"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="1" />
+
+        <ImageView
+            android:id="@+id/favorite_icon"
+            android:layout_width="@dimen/size12"
+            android:layout_height="@dimen/size12"
+            android:layout_marginTop="@dimen/size3"
+            android:layout_marginEnd="@dimen/size3"
+            android:background="@drawable/favourite_icon_selector"
+            app:layout_constraintEnd_toEndOf="@id/product_image"
+            app:layout_constraintTop_toTopOf="@id/product_image" />
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size7"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/_15_000"
+            android:textColor="@color/blueAppColor"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/product_image"
+            app:layout_constraintTop_toBottomOf="@id/product_image" />
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="@dimen/size0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size7"
+            android:ellipsize="end"
+            android:fontFamily="@font/montserrat"
+            android:maxLines="1"
+            android:text="@string/iphone_13_pro_max_256gb"
+            android:textColor="@color/black"
+            android:textSize="@dimen/header4Size"
+            app:layout_constraintEnd_toEndOf="@+id/product_image"
+            app:layout_constraintStart_toStartOf="@+id/product_price"
+            app:layout_constraintTop_toBottomOf="@+id/product_price" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size5"
+            android:layout_marginTop="@dimen/size7"
+            android:layout_marginEnd="@dimen/size5"
+            android:layout_marginBottom="@dimen/size5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/product_name">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_to_cart_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:text="@string/add_to_cart"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/header4Size"
+                app:backgroundTint="@color/blueAppColor"
+                app:cornerRadius="@dimen/size2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/constraint"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
