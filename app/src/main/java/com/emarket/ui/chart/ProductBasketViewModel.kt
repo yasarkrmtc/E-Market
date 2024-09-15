@@ -73,7 +73,11 @@ class ProductBasketViewModel @Inject constructor(
     }
     fun getDataBaseItemCount(){
         viewModelScope.launch {
+<<<<<<< HEAD
             getDataBaseItemCounter().collect{
+=======
+            getDataBaseItemCounter().collect {
+>>>>>>> parent of fb93259 (general clean)
                 _databaseCounter.value = it
             }
         }

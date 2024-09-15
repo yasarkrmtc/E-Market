@@ -2,7 +2,10 @@ package com.emarket.ui.chart
 
 import com.emarket.data.local.ItemEntity
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of fb93259 (general clean)
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -39,7 +42,10 @@ class ProductBasketAdapter :
                 binding.tvCounter.text = product.totalOrder.toString()
                 onItemClick.invoke(product)
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of fb93259 (general clean)
         }
     }
 

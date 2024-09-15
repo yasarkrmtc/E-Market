@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.emarket.base.BaseFragment
-import com.emarket.data.remote.Product
 import com.emarket.databinding.FragmentProductDetailBinding
 import com.emarket.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +26,14 @@ class ProductDetailFragment :
         val product = args.product
         viewModel.getDataBaseItemCount()
         binding.apply {
+<<<<<<< HEAD
+=======
+            detailBackButton.clickWithDebounce {
+                findNavController().popBackStack()
+            }
+
+            detailTitle.text = product.name
+>>>>>>> parent of fb93259 (general clean)
             detailName.text = product.name
             detailPriceText.text = product.price
             detailDescription.text = product.description
@@ -49,8 +56,13 @@ class ProductDetailFragment :
             }
 
             productDetailButton.setOnClickListener {
+<<<<<<< HEAD
                 val newProduct = product.copy(totalOrder = product.totalOrder+1)
                viewModel.updateDataBase(newProduct)
+=======
+                val newProduct = product.copy(totalOrder = product.totalOrder + 1)
+                viewModel.updateDataBase(newProduct)
+>>>>>>> parent of fb93259 (general clean)
             }
         }
     }

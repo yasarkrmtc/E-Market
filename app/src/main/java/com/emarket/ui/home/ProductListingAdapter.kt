@@ -68,6 +68,7 @@ class ProductListingAdapter :
             binding.addToCartButton.clickWithDebounce {
                 product.totalOrder += 1
                 itemClick.invoke(product)
+<<<<<<< HEAD
             }
 
 
@@ -75,6 +76,14 @@ class ProductListingAdapter :
                 productClick.invoke(product)
             }
 
+=======
+                Toast.makeText(binding.root.context, "${product.name} added to cart", Toast.LENGTH_SHORT).show()
+            }
+
+            binding.root.clickWithDebounce {
+                productClick.invoke(product)
+            }
+>>>>>>> parent of fb93259 (general clean)
         }
     }
 
