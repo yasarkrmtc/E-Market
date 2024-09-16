@@ -14,5 +14,4 @@ interface ServiceInterface {
         @Query("model") model: String,
         @Query("sortBy") sortedBy : String
     ): Response<List<Product>>
-
 }

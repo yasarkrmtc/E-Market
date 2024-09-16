@@ -56,7 +56,11 @@ class ProductBasketFragment :
         binding.completeButton.setOnClickListener {
             if (basketAdapter.currentList.isNotEmpty()) {
                 viewModel.clearDatabase()
+
+                showToast("Completed Successful")
+
                 Toast.makeText(requireContext(), "Completed", Toast.LENGTH_SHORT).show()
+
             } else {
                 Toast.makeText(requireContext(), "No items to complete", Toast.LENGTH_SHORT).show()
             }

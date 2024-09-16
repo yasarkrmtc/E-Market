@@ -91,18 +91,28 @@ class ProductListingFragment :
 
         viewLifecycleOwner.lifecycleScope.launch {
             productListingAdapter.loadStateFlow.collectLatest { loadState ->
+                val isLoadingInitial = loadState.refresh is LoadState.Loading
+                binding.progressBar.isVisible = isLoadingInitial
+
+                val isAppending = loadState.append is LoadState.Loading
+                binding.itemProggress.isVisible = isAppending
+
                 val isListEmpty =
                     loadState.refresh is LoadState.NotLoading && productListingAdapter.itemCount == 0
-                binding.rv.isVisible = loadState.source.refresh is LoadState.NotLoading
-                if (isListEmpty) {
+                binding.rv.isVisible = !isLoadingInitial && !isListEmpty
+
+                if (isListEmpty && !isLoadingInitial) {
+                    binding.progressBar.visibility = View.GONE
+                } else if (isLoadingInitial) {
                     binding.progressBar.visibility = View.VISIBLE
+
+
                     binding.itemProggress.visibility = View.INVISIBLE
                 } else {
                     binding.itemProggress.visibility = View.GONE
 
+
                 }
-                binding.itemProggress.isVisible =
-                    loadState.source.refresh is LoadState.Loading || loadState.append is LoadState.Loading
 
                 val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error
@@ -110,13 +120,17 @@ class ProductListingFragment :
                 errorState?.let {
                     Toast.makeText(
                         requireContext(),
-                        "Veriler yüklenirken hata oluştu!",
+                        "An error occurred while loading data",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
         }
     }
+
+
+
+}
 
     private fun setupRecyclerView() {
         binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -133,3 +147,4 @@ class ProductListingFragment :
         binding.rv.addItemDecoration(itemDecoration)
     }
 }
+
