@@ -127,11 +127,6 @@ class ProductListingFragment :
             }
         }
     }
-
-
-
-}
-
     private fun setupRecyclerView() {
         binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rv.adapter = productListingAdapter
@@ -147,4 +142,7 @@ class ProductListingFragment :
         binding.rv.addItemDecoration(itemDecoration)
     }
 }
+
+
+
 
