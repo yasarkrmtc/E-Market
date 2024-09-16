@@ -1,5 +1,6 @@
 package com.emarket.ui.chart
 
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.emarket.data.local.ItemEntity
@@ -24,39 +25,42 @@ class ProductBasketViewModel @Inject constructor(
     private val deleteAllItemsUseCase: DeleteAllItemsUseCase,
     private val getDataBaseItemCounter: GetDataBaseItemCount
 ) : ViewModel() {
-
     private val _items = MutableStateFlow<List<ItemEntity>>(emptyList())
-    val items: StateFlow<List<ItemEntity>> = _items.asStateFlow()
+    val items: StateFlow<List<ItemEntity>> = _items
 
     private val _databaseCounter = MutableStateFlow(0)
-    val databaseCounter: StateFlow<Int> = _databaseCounter.asStateFlow()
+    val databaseCounter: MutableStateFlow<Int> = _databaseCounter
 
     private val _localPrice = MutableStateFlow("₺0.00")
-    val localPrice: StateFlow<String> = _localPrice.asStateFlow()
+    val localPrice = _localPrice.asStateFlow()
 
     fun getLocalItems() {
         viewModelScope.launch {
-            getLocalItemsUseCase().collect { items ->
-                _items.value = items
+            getLocalItemsUseCase().collect {
+                _items.value = it
             }
         }
     }
 
     fun getTotalPrice() {
         viewModelScope.launch {
-            getTotalPriceUseCase().collect { totalPrice ->
-                _localPrice.value = totalPrice?.let { "₺${"%.2f".format(it)}" } ?: "₺0.00"
+            getTotalPriceUseCase().collect {
+                it?.let {
+                    _localPrice.value = "₺" + String.format("%.2f", it)
+                }
+                if (it == null) _localPrice.value = "₺0.00"
             }
         }
     }
 
-    fun updateDataBase(product: Product) {
+    fun updateDataBase(item: Product) {
         viewModelScope.launch {
-            insertDataBaseUseCase(product)
+            insertDataBaseUseCase(item)
             getLocalItems()
             getTotalPrice()
-            getDataBaseItemCount()
         }
+        getDataBaseItemCount()
+
     }
 
     fun clearDatabase() {
@@ -64,14 +68,14 @@ class ProductBasketViewModel @Inject constructor(
             deleteAllItemsUseCase()
             getLocalItems()
             getTotalPrice()
-            getDataBaseItemCount()
         }
+        getDataBaseItemCount()
     }
 
     fun getDataBaseItemCount() {
         viewModelScope.launch {
-            getDataBaseItemCounter().collect { count ->
-                _databaseCounter.value = count
+            getDataBaseItemCounter().collect {
+                _databaseCounter.value = it
             }
         }
     }
